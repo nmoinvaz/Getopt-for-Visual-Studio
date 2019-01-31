@@ -16,8 +16,14 @@ enum /* permitted values for its `has_arg' field... */
 	optional_argument /* option may take an argument */
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 extern char *optarg; /* argument associated with option */
 extern int optind; /* index into parent argv vector */
+
+int getopt(int nargc, char * const *nargv, const char *options);
 
 int getopt_long_only(int nargc, char * const *nargv, const char *options,
 		const struct option *long_options, int *idx);
@@ -28,5 +34,8 @@ int getopt_long(int nargc, char * const *nargv, const char *options,
 int getopt_long_only(int nargc, char * const *nargv, const char *options,
 		const struct option *long_options, int *idx);
 
+#ifdef __cplusplus
+}
 #endif
 
+#endif

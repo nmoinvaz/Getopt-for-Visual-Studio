@@ -67,13 +67,6 @@
 #include <windows.h>
 #include "getopt.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#define	REPLACE_GETOPT		/* use this getopt as the system getopt(3) */
-
-#ifdef REPLACE_GETOPT
 int	opterr = 1;		/* if error message should be printed */
 int	optind = 1;		/* index into parent argv vector */
 int	optopt = '?';		/* character checked for validity */
@@ -81,14 +74,6 @@ int	optopt = '?';		/* character checked for validity */
 #define	optreset		__mingw_optreset
 int	optreset;		/* reset getopt */
 char    *optarg;		/* argument associated with option */
-#endif
-
-//extern int optind;		/* index of first non-option in argv      */
-//extern int optopt;		/* single option character, as parsed     */
-//extern int opterr;		/* flag to enable built-in diagnostics... */
-//				/* (user may set to zero, to suppress)    */
-//
-//extern char *optarg;		/* pointer to argument of current option  */
 
 #define PRINT_ERROR	((opterr) && (*options != ':'))
 
@@ -207,7 +192,6 @@ permute_args(int panonopt_start, int panonopt_end, int opt_end,
 	}
 }
 
-#ifdef REPLACE_GETOPT
 /*
  * getopt --
  *	Parse argc/argv argument vector.
@@ -228,7 +212,6 @@ getopt(int nargc, char * const *nargv, const char *options)
 	 */
 	return (getopt_internal(nargc, nargv, options, NULL, NULL, 0));
 }
-#endif /* REPLACE_GETOPT */
 
 //extern int getopt(int nargc, char * const *nargv, const char *options);
 
@@ -628,8 +611,5 @@ getopt_long_only(int nargc, char * const *nargv, const char *options,
 # define HAVE_DECL_GETOPT	1
 #endif
 
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* !defined(__UNISTD_H_SOURCED__) && !defined(__GETOPT_LONG_H__) */
